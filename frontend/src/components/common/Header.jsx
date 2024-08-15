@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../store/actions/usersActions";
+import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutUser} from "../../store/actions/usersActions";
 import "./../styles/Header.css";
 
 function Header() {
@@ -17,15 +17,20 @@ function Header() {
                     </Link>
                 </div>
                 <nav className="nav-section">
-                    {user && user.role === 'admin' && (
-                        <Link to="/admin" className="nav-link">Админ панель</Link>
-                    )}
+
                 </nav>
                 <div className="user-section">
                     {user ? (
-                        <button className="logout-button" onClick={() => dispatch(logoutUser())}>
-                            Выйти
-                        </button>
+                        <>
+                            {user && user.role === 'admin' && (
+                                <Link to="/admin" className="nav-link">Администратор</Link>
+                            )}
+                            <button className="logout-button" onClick={() => dispatch(logoutUser())}>
+                                Выйти
+                            </button>
+
+                        </>
+
                     ) : (
                         <div className="auth-links">
                             <Link to="/login" className="auth-link">Войти</Link>

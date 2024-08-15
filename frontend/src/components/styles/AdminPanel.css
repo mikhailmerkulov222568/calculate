@@ -1,29 +1,37 @@
+/* AdminPanel.css */
+
 .admin-container {
-  background-color: #f4f4f4;
+  background-color: #333; /* Черный фон */
   padding: 20px;
   font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+  color: #f4f4f4; /* Светлый текст для хорошей контрастности */
 }
 
 .admin-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid #ddd;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #555; /* Более светлый серый для границ */
 }
-.dashboard-header{
+
+.admin-header h1 {
+  font-size: 32px;
+  color: #f4f4f4; /* Белый текст */
+  font-weight: bold;
+}
+
+.dashboard-header {
   display: flex;
   justify-content: space-between;
-}
-.admin-header h1 {
-  font-size: 28px;
-  color: #333;
+  align-items: center;
 }
 
 .header-actions {
   display: flex;
-  gap: 20px;
+  gap: 15px;
 }
 
 .export-button {
@@ -41,16 +49,18 @@
 }
 
 .admin-content {
-  background-color: #ffffff;
-  padding: 20px;
+  background-color: #444; /* Темно-серый для контраста с текстом */
+  padding: 25px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  color: #f4f4f4; /* Светлый текст */
 }
 
 .admin-content h2 {
   margin-bottom: 20px;
   font-size: 24px;
-  color: #333;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .calculations-table {
@@ -62,28 +72,33 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  background-color: #555; /* Темный фон таблицы */
 }
 
 th, td {
-  padding: 10px;
+  padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #666; /* Светло-серый цвет для границ */
 }
 
 th {
-  background-color: #f7f7f7;
-  color: #333;
+  background-color: #666;
+  color: #f4f4f4; /* Белый текст */
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 td {
-  color: #555;
+  color: #f4f4f4; /* Белый текст */
 }
 
 .edit-btn, .delete-btn {
-  padding: 5px 10px;
+  padding: 6px 12px;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
@@ -108,8 +123,118 @@ td {
 }
 
 .loading, .error {
-  color: #f44336;
+  color: #ffcccb; /* Светлый цвет для текста ошибок */
   text-align: center;
   font-size: 16px;
   margin-top: 20px;
+}
+
+.calculation-form {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 25px;
+  background-color: #555; /* Темный фон формы */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #f4f4f4; /* Светлый текст */
+}
+
+.calculation-form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.calculation-form select,
+.calculation-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #777; /* Светло-серый цвет для границ */
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  color: #ffffff; /* Белый текст */
+  background-color: #666; /* Темно-серый фон для полей ввода */
+}
+
+.calculation-form .select-field {
+  appearance: none;
+  background-color: #666; /* Темно-серый фон для выпадающего списка */
+}
+/* AdminPanel.css */
+
+.calculation-form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff; /* Белый текст */
+  font-weight: 600;
+}
+
+.calculation-form select,
+.calculation-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #777; /* Светло-серый цвет для границ */
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  color: #ffffff; /* Белый текст */
+  background-color: #666; /* Темно-серый фон для полей ввода */
+}
+
+.calculation-form select::placeholder,
+.calculation-form input::placeholder {
+  color: #cccccc; /* Светло-серый цвет для текста плейсхолдера */
+}
+
+.calculation-form .select-field {
+  appearance: none;
+  background-color: #666; /* Темно-серый фон для выпадающего списка */
+  color: #ffffff; /* Белый текст для выпадающего списка */
+}
+
+.calculation-form label {
+  color: #ffffff; /* Белый текст для меток */
+  margin-bottom: 5px;
+  display: block;
+  font-size: 14px;
+}
+
+
+.calculation-form .form-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.calculation-form .save-button,
+.calculation-form .cancel-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.calculation-form .save-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.calculation-form .save-button:hover {
+  background-color: #45a049;
+}
+
+.calculation-form .cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.calculation-form .cancel-button:hover {
+  background-color: #e53935;
 }

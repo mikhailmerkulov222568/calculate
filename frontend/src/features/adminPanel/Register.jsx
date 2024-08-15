@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearRegisterErrors, registerUser } from "../../store/actions/usersActions";
-import './../styles/Register.css';
-import {Link, useNavigate} from "react-router-dom";
+import '../../components/styles/Register.css';
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -14,13 +14,14 @@ const Register = () => {
         password: '',
         displayName: '',
     });
-
+    const [localError, setLocalError] = useState(null); // Состояние для хранения локальной ошибки
     const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
         return () => {
             dispatch(clearRegisterErrors());
-        }
+            setLocalError(null);
+        };
     }, [dispatch]);
 
     const inputChangeHandler = e => {
@@ -34,14 +35,29 @@ const Register = () => {
 
     const submitFormHandler = async e => {
         e.preventDefault();
-        await dispatch(registerUser({ ...user }));
-        navigate('/');
+        try {
+            const resultAction = await dispatch(registerUser({ ...user }));
+
+            if (resultAction && resultAction.payload) {
+                if (resultAction.payload.error) {
+                    setLocalError(resultAction.payload.error);
+                } else {
+                    navigate('/'); // Переход на главную страницу только если нет ошибки
+                }
+            } else {
+                setLocalError('Не удалось выполнить регистрацию.');
+            }
+        } catch (e) {
+            setLocalError(e.message || 'Ошибка регистрации');
+        }
     };
 
     return (
         <div className="register-container">
             <h1 className="register-title">Register</h1>
-            {error && <p className="register-error">{error}</p>}
+            {/* Отображаем ошибки из глобального состояния или локальные ошибки */}
+            {error && <p className="register-error">{error.error}</p>}
+            {localError && <p className="register-error">{localError}</p>}
             <form onSubmit={submitFormHandler} className="register-form">
                 <input
                     type="text"
@@ -73,13 +89,13 @@ const Register = () => {
                         onClick={togglePasswordVisibility}
                         className="password-toggle-button"
                     >
-                        {showPassword ? '👁️' : '🙈'}
+                        {showPassword ? '🔓' : '🔒'}
                     </button>
                 </div>
                 <button type="submit" className="register-button" disabled={loading}>
                     {loading ? 'Loading...' : 'Register'}
                 </button>
-                <Link  to="/login" style={{margin: '10px 30px'}}>
+                <Link to="/login" style={{ margin: '10px 30px' }}>
                     Войти
                 </Link>
             </form>

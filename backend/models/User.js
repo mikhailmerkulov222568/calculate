@@ -6,14 +6,12 @@ const SALT_WORK_FACTOR = 10;
 
 const validateUnique = async function(value) {
     const user = await this.constructor.findOne({ email: value });
-    if (user && user._id.toString() !== this._id.toString()) {
-        return false;
-    }
-    return true;
+    return !(user && user._id.toString() !== this._id.toString());
+
 };
 
 const validateEmail = value => {
-    const pattern = /^([a-zA-Z0-9]+[_.]?[a-zA-Z0-9])+@([a-zA-Z]{2,5})\.([a-z]{2,3})(\.[a-z]{2,3})?$/;
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return pattern.test(value);
 };
 

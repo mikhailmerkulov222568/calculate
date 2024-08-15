@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Calculator from "./calculators/Calculator";
-import './styles/Home.css';
+import Calculator from "../components/calculators/Calculator";
+import '../components/styles/Home.css';
 
 function Home() {
     const [activeCalculator, setActiveCalculator] = useState("mortgage");

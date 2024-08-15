@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCalculations, deleteCalculation } from "../../store/actions/adminActions";
-import CalculationForm from './../calculators/CalculationForm';
-import './../styles/AdminPanel.css';
+import CalculationForm from '../../components/calculators/CalculationForm';
+import './../../components/styles/AdminPanel.css';
 
 const AdminPanel = () => {
     const dispatch = useDispatch();

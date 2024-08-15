@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import Login from "./components/adminPanel/Login";
+import Home from "./features/Home";
+import Login from "./features/adminPanel/Login";
 import Header from "./components/common/Header";
 import './components/styles/App.css'
-import Register from "./components/adminPanel/Register";
-import AdminPanel from "./components/adminPanel/AdminPanel";
+import Register from "./features/adminPanel/Register";
+import AdminPanel from "./features/adminPanel/AdminPanel";
 
 function App() {
   return (
