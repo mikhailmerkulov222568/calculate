@@ -1,30 +1,32 @@
 .styleButton {
-    padding: 10px 20px;
-    border: 2px solid #548FD4;
-    background-color: #ffffff;
-    color: #000000;
+    padding: 15px 30px;
+    border: 3px solid #ff4081;
+    background-color: #1e1e1e;
+    color: #ff4081;
     cursor: pointer;
-    border-radius: 5px;
-    font-size: 32px;
+    border-radius: 10px;
+    font-size: 36px;
     width: 100%;
-    height: 80px;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    height: 100px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 
 .styleButton:hover {
-    background-color: #548FD4;
-    color: #ffffff;
+    background-color: #ff4081;
+    color: #1e1e1e;
+    transform: translateY(-5px) scale(1.05);
 }
 
 .styleButton:active {
-    background-color: #2c3e50;
-    border-color: #2c3e50;
+    background-color: #c2185b;
+    border-color: #c2185b;
     color: #ffffff;
+    transform: translateY(0) scale(1);
 }
 
 .styleButton:disabled {
-    background-color: #ccc;
-    color: #666;
-    border-color: #aaa;
+    background-color: #555;
+    color: #999;
+    border-color: #444;
     cursor: not-allowed;
 }

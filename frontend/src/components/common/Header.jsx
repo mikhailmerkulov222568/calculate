@@ -1,29 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../store/actions/usersActions";
 import "./../styles/Header.css";
-import {useDispatch, useSelector} from "react-redux";
-import {logoutUser} from "../../store/actions/usersActions";
 
 function Header() {
-    const user = useSelector(state => state.users.user);
+    const user = useSelector((state) => state.users.user);
     const dispatch = useDispatch();
 
     return (
-        <div className="Header-container">
-            <div className="Header">
-                <Link to="/" style={{marginRight: '20px'}}>Главная</Link><hr/>
-                {user && user.role === 'admin' && <Link to="/admin">Админ панель</Link>}
-                <h1>Калькулятор финансов</h1>
-                {user ?
-                    <button style={{padding: '10px'}} onClick={()=> dispatch(logoutUser())}>Выйти</button>
-                    :
-                <div>
-                    <Link to="/login" style={{marginRight: '10px'}}>Войти</Link>
-                    <Link to="/register">Зарегистрироваться</Link>
+        <header className="header-container">
+            <div className="header-content">
+                <div className="logo-section">
+                    <Link to="/" className="logo-link">
+                        Калькулятор
+                    </Link>
                 </div>
-                }
+                <nav className="nav-section">
+                    {user && user.role === 'admin' && (
+                        <Link to="/admin" className="nav-link">Админ панель</Link>
+                    )}
+                </nav>
+                <div className="user-section">
+                    {user ? (
+                        <button className="logout-button" onClick={() => dispatch(logoutUser())}>
+                            Выйти
+                        </button>
+                    ) : (
+                        <div className="auth-links">
+                            <Link to="/login" className="auth-link">Войти</Link>
+                            <Link to="/register" className="auth-link">Зарегистрироваться</Link>
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
+        </header>
     );
 }
 

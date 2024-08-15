@@ -5,46 +5,47 @@ import './styles/Home.css';
 function Home() {
     const [activeCalculator, setActiveCalculator] = useState("mortgage");
 
-    const renderCalculator = () => {
-        switch (activeCalculator) {
-            case "mortgage":
-                return <Calculator interestRate={9.6} loanType="на ипотеку" />;
-            case "car":
-                return <Calculator interestRate={3.5} loanType="на автокредит" />;
-            case "consumer":
-                return <Calculator interestRate={14.5} loanType="на потребительский кредит" />;
-            default:
-                return <Calculator interestRate={9.6} loanType="на ипотеку" />;
-        }
+    const calculators = {
+        mortgage: { interestRate: 9.6, loanType: "Ипотека" },
+        car: { interestRate: 3.5, loanType: "Автокредит" },
+        consumer: { interestRate: 14.5, loanType: "Потребительский кредит" }
+    };
+
+    const handleCalculatorChange = (type) => {
+        setActiveCalculator(type);
     };
 
     return (
-        <div className="Home">
-            <div className="calculator-buttons">
-                <button
-                    className={`link-button ${activeCalculator === "mortgage" ? "active" : ""}`}
-                    onClick={() => setActiveCalculator("mortgage")}
-                >
-                    Ипотека
-                </button>
-                <div className="line-between"></div>
-                <button
-                    className={`link-button ${activeCalculator === "car" ? "active" : ""}`}
-                    onClick={() => setActiveCalculator("car")}
-                >
-                    Автокредитование
-                </button>
-                <div className="line-between"></div>
-                <button
-                    className={`link-button ${activeCalculator === "consumer" ? "active" : ""}`}
-                    onClick={() => setActiveCalculator("consumer")}
-                >
-                    Потребительский кредит
-                </button>
-            </div>
-            <div className="calculator-display">
-                {renderCalculator()}
-            </div>
+        <div className="home-wrapper">
+            <header className="home-header">
+                <h1>Выбор калькулятора</h1>
+                <nav className="calculator-navigation">
+                    {Object.entries(calculators).map(([type, { loanType }]) => (
+                        <button
+                            key={type}
+                            className={`nav-button ${activeCalculator === type ? "active" : ""}`}
+                            onClick={() => handleCalculatorChange(type)}
+                        >
+                            {loanType}
+                        </button>
+                    ))}
+                </nav>
+            </header>
+            <section className="calculator-section">
+                <div className="calculator-info">
+                    <h2 className="calculator-title">
+                        {calculators[activeCalculator].loanType}
+                    </h2>
+                    <p>Процентная ставка: {calculators[activeCalculator].interestRate}%</p>
+                </div>
+                <Calculator
+                    interestRate={calculators[activeCalculator].interestRate}
+                    loanType={calculators[activeCalculator].loanType}
+                />
+            </section>
+            <footer className="home-footer">
+                <p>© 2024 Кредитный Калькулятор. Все права защищены.</p>
+            </footer>
         </div>
     );
 }

@@ -41,30 +41,65 @@ const AdminPanel = () => {
     };
 
     return (
-        <div className="admin-panel">
-            <h2>Управление расчетами</h2>
-            <CalculationForm currentCalculation={currentCalculation} setCurrentCalculation={setCurrentCalculation} />
-            <button className="export-button" onClick={handleExport}>Экспортировать данные</button>
-            {loadingCalculations && <p>Загрузка расчетов...</p>}
-            {error && <p>Ошибка: {error}</p>}
-            <ul>
-                {calculations && calculations.map((calculation, index) => (
-                    <li key={index}>
-                        <p><strong>Тип кредита:</strong> {calculation.type}</p>
-                        <p><strong>Сумма кредита:</strong> {calculation.cost} ₽</p>
-                        <p><strong>Первоначальный взнос:</strong> {calculation.initialPayment} ₽</p>
-                        <p><strong>Срок кредита:</strong> {calculation.term} лет</p>
-                        <p><strong>Процентная ставка:</strong> {calculation.interestRate}%</p>
-                        <p><strong>Сумма кредита:</strong> {calculation.loanAmount} ₽</p>
-                        <p><strong>Ежемесячный платеж:</strong> {calculation.monthlyPayment} ₽</p>
-                        <p><strong>Общая сумма выплат:</strong> {calculation.totalPayment} ₽</p>
-                        <p><strong>Необходимый доход:</strong> {calculation.requiredIncome} ₽</p>
-                        <p><strong>Дата создания:</strong> {new Date(calculation.createdAt).toLocaleString()}</p>
-                        <button style={{ marginRight: '10px'}} onClick={() => handleEdit(calculation)} className="edit-button">Редактировать</button>
-                        <button onClick={() => handleDelete(calculation._id)} className="delete-button">Удалить</button>
-                    </li>
-                ))}
-            </ul>
+        <div className="admin-container">
+            <header className="dashboard-header">
+                <h1>Панель администратора</h1>
+                <button className="export-btn" onClick={handleExport}>Экспортировать</button>
+            </header>
+            <main className="admin-content">
+                <h2>Список расчетов</h2>
+                {loadingCalculations && <p className="loading">Загрузка расчетов...</p>}
+                {error && <p className="error">Ошибка: {error}</p>}
+                <div className="calculations-table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Тип</th>
+                            <th>Сумма</th>
+                            <th>Первоначальный взнос</th>
+                            <th>Срок</th>
+                            <th>Процентная ставка</th>
+                            <th>Ежемесячный платеж</th>
+                            <th>Общая сумма выплат</th>
+                            <th>Необходимый доход</th>
+                            <th>Дата создания</th>
+                            <th>Действия</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {calculations && calculations.map((calculation, index) => (
+                            <tr key={index}>
+                                <td>{calculation.type}</td>
+                                <td>{calculation.cost} ₽</td>
+                                <td>{calculation.initialPayment} ₽</td>
+                                <td>{calculation.term} лет</td>
+                                <td>{calculation.interestRate}%</td>
+                                <td>{calculation.monthlyPayment} ₽</td>
+                                <td>{calculation.totalPayment} ₽</td>
+                                <td>{calculation.requiredIncome} ₽</td>
+                                <td>{new Date(calculation.createdAt).toLocaleString()}</td>
+                                <td>
+                                    <button onClick={() => handleEdit(calculation)} className="edit-btn">Редактировать
+                                    </button>
+                                    <button onClick={() => handleDelete(calculation._id)}
+                                            className="delete-btn">Удалить
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+            <div className="admin-dashboard">
+
+                <main className="dashboard-content">
+                    <aside className="form-sidebar">
+                        <CalculationForm currentCalculation={currentCalculation}
+                                         setCurrentCalculation={setCurrentCalculation}/>
+                    </aside>
+                </main>
+            </div>
         </div>
     );
 }

@@ -16,7 +16,6 @@ function Calculator({ interestRate, loanType }) {
   };
 
   const handleCalculate = () => {
-    // Устанавливаем процентную ставку и тип кредита в состояние перед расчетом
     dispatch(setCalculatorData({ interestRate, loanType }));
     dispatch(calculateLoan());
   };
@@ -26,109 +25,81 @@ function Calculator({ interestRate, loanType }) {
   };
 
   return (
-      <div>
-        <div className="kredit">
-          <h1 style={{ fontSize: '35px', textAlign: 'center' }}>
-            Процентная ставка {loanType} <strong style={{ fontSize: '55px' }}>{interestRate} </strong>(%)
+      <div className="calculator-container">
+        <header className="calculator-header">
+          <h1 className="interest-rate-title">
+            Процентная ставка <strong>{interestRate}</strong> (%)
           </h1>
-        </div>
-        <div className="Calc">
-          <div className="data-section-input">
-            <div className="kredit">
-              <h3 className="title">Сумма кредита</h3>
-            </div>
-            <div className="div2">
+          <button
+              className="styleButton email-button"
+              onClick={() => setShowModal(true)}
+          >
+            Результаты на почту
+          </button>
+        </header>
+        <main className="calculator-main">
+          <section className="input-section">
+            <div className="input-group">
+              <label htmlFor="cost" className="title">Сумма кредита</label>
               <input
-                  className="mortgage-amount"
-                  type="range"
-                  min="0"
-                  max={10000000}
-                  name="cost"
-                  value={calculator.cost}
-                  onChange={handleChange}
-                  step="1000"
-              />
-              <div className="value-cost">
-                <p className="value-from-cost">0 ₽</p>
-                <p className="value-to-cost">10 000 000 ₽</p>
-              </div>
-              <input
+                  id="cost"
                   type="number"
                   name="cost"
                   value={calculator.cost}
                   onChange={handleChange}
+                  placeholder="Введите сумму кредита"
               />
             </div>
-            <div className="kredit">
-              <h3 className="title">Срок кредита (лет)</h3>
-            </div>
-            <div className="div2">
+            <div className="input-group">
+              <label htmlFor="term" className="title">Срок кредита (лет)</label>
               <input
-                  type="range"
-                  min="1"
-                  max="30"
-                  name="term"
-                  value={calculator.term}
-                  onChange={handleChange}
-                  step="1"
-              />
-              <div className="value-cost">
-                <p className="value-from-cost">1 год</p>
-                <p className="value-to-cost">30 лет</p>
-              </div>
-              <input
+                  id="term"
                   type="number"
                   min="1"
                   max="30"
                   name="term"
                   value={calculator.term}
                   onChange={handleChange}
+                  placeholder="Введите срок кредита"
               />
             </div>
-          </div>
-          <div className="data-section-output">
-            <div className="kredit head-output">
-              <h3 className="title">Первоначальный взнос</h3>
-            </div>
-            <div className="div2">
+            <div className="input-group">
+              <label htmlFor="initialPayment" className="title">Первоначальный взнос</label>
               <input
-                  style={{ border: '1px solid black' }}
+                  id="initialPayment"
                   type="number"
                   name="initialPayment"
                   value={calculator.initialPayment === 0 ? '' : calculator.initialPayment}
-                  placeholder="0"
+                  placeholder="Первоначальный взнос"
                   onChange={handleChange}
               />
-            </div>
-            <div className="info-value-block">
-              <div className="info-value grey">
-                Ежемесячный платеж <br /> <strong>{calculator.monthlyPayment ? calculator.monthlyPayment.toLocaleString() : '0'}</strong> ₽
-              </div>
-              <div className="info-value blue">
-                Общая сумма выплат <br /> <strong>{calculator.totalPayment ? calculator.totalPayment.toLocaleString() : '0'}</strong> ₽
-              </div>
-              <div className="info-value green">
-                Необходимый доход <br /> <strong>{calculator.requiredIncome ? calculator.requiredIncome.toLocaleString() : '0'}</strong> ₽
-              </div>
             </div>
             <button
                 className="styleButton"
                 onClick={handleCalculate}
                 disabled={calculator.cost <= 0 || calculator.initialPayment <= 0 || calculator.term <= 0}
             >
-              Рассчитать
+              Расчет
             </button>
-            <br />
-            <button
-                className="styleButton"
-                onClick={() => setShowModal(true)}
-            >
-              Отправить результаты на почту
-            </button>
-          </div>
-        </div>
+          </section>
+          <section className="output-section">
+            <div className="info-value-block">
+              <div className="info-value grey">
+                Ежемесячный платеж <br/>
+                <strong>{calculator.monthlyPayment ? calculator.monthlyPayment.toLocaleString() : '0'}</strong> ₽
+              </div>
+              <div className="info-value blue">
+                Общая сумма выплат <br/>
+                <strong>{calculator.totalPayment ? calculator.totalPayment.toLocaleString() : '0'}</strong> ₽
+              </div>
+              <div className="info-value green">
+                Необходимый доход <br/>
+                <strong>{calculator.requiredIncome ? calculator.requiredIncome.toLocaleString() : '0'}</strong> ₽
+              </div>
+            </div>
+          </section>
+        </main>
 
-        {/* Модальное окно для отправки email */}
         <EmailModal
             show={showModal}
             onClose={() => setShowModal(false)}

@@ -1,44 +1,61 @@
 form {
   display: flex;
   flex-direction: column;
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 30px;
+  border: 2px solid #ff4081;
+  border-radius: 15px;
+  background-color: #1e1e1e;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
 }
 
 label {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-weight: bold;
+  font-size: 18px;
+  color: #ff4081;
 }
 
 input[type="text"],
 input[type="password"] {
-  padding: 8px;
+  padding: 15px;
   width: 100%;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 5px;
+  font-size: 18px;
+  border: 2px solid #ff4081;
+  border-radius: 8px;
+  background-color: #2c2c2c;
+  color: #ffffff;
+  margin-top: 10px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #e91e63;
+  background-color: #333333;
 }
 
 input[type="submit"] {
-  padding: 10px;
-  font-size: 16px;
-  background-color: #2c629f;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  padding: 15px;
+  font-size: 18px;
+  background-color: #ff4081;
+  color: #ffffff;
+  border: 2px solid #ff4081;
+  border-radius: 8px;
   cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 input[type="submit"]:disabled {
-  background-color: #ccc;
+  background-color: #555555;
+  border-color: #444444;
   cursor: not-allowed;
 }
 
 input[type="submit"]:hover:not(:disabled) {
-  background-color: #1e4b7a;
+  background-color: #e91e63;
+  transform: translateY(-3px);
 }
