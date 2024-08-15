@@ -8,7 +8,7 @@
     "dev": "nodemon server.js",
     "build": "node server.js"
   },
-  "author": "Martin13025",
+  "author": "Mikhail",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
