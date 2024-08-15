@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Bank-application",
+  "description": "Finance calculate",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -24,5 +24,8 @@
   "keywords": [],
   "devDependencies": {
     "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=14.x"
   }
 }

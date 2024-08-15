@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const users = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const calculate = require('./routes/calculatorRoutes');
-const {join} = require("path");
 require('dotenv').config();
 
 const app = express();
